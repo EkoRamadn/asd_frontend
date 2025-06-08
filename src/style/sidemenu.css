@@ -1,0 +1,48 @@
+.side-menu {
+  width: 250px;
+  height: 100vh;
+  padding: 2rem 1rem;
+  color: white;
+  background: linear-gradient(to bottom right, #1a1aff 20%, #9d00ff, #ff00cc, #b2f0ff);
+  display: flex;
+  flex-direction: column;
+}
+
+
+.side-menu .profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-menu .profile img {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.menu-links {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.menu-links li {
+  margin: 0.8rem 0;
+}
+
+.menu-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.menu-links li a:hover {
+  color: #ffd700; 
+}
+
+.avatar-icon{
+    width: 66px;
+    height: 66px;
+}

@@ -1,0 +1,10 @@
+.checkbox-chart{
+    width: 15px;
+    height: 15px;
+    margin-right: 7px;
+}
+
+.groub-checkbox-chart{
+    display: flex;
+    align-items: center;
+}

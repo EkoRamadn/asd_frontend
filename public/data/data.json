@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "date": "Senin 17-05-2025",
+        "income": 2900000,
+        "expanse": 10000
+    },
+    {
+        "id": 2,
+        "date": "Selasa 18-04-2025",
+        "income": 3200000,
+        "expanse": 100000
+    },
+    {
+        "id": 3,
+        "date": "Rabu 19-02-2025",
+        "income": 2800000,
+        "expanse": 10000
+    },
+    {
+        "id": 4,
+        "date": "Kamis 20-01-2025",
+        "income": 3100000,
+        "expanse": 10000
+    },
+    {
+        "id": 5,
+        "date": "Jumat 21-04-2025",
+        "income": 3300000,
+        "expanse": 10000
+    },
+    {
+        "id": 6,
+        "date": "Sabtu 22-03-2025",
+        "income": 3050000,
+        "expanse": 10000
+    },
+    {
+        "id": 7,
+        "date": "Minggu 23-02-2025",
+        "income": 2950000,
+        "expanse": 10000
+    },
+    {
+        "id": 8,
+        "date": "Senin 24-04-2025",
+        "income": 3100000,
+        "expanse": 10000
+    },
+    {
+        "id": 9,
+        "date": "Selasa 25-05-2025",
+        "income": 3000000,
+        "expanse": 10000
+    },
+    {
+        "id": 10,
+        "date": "Rabu 26-03-2025",
+        "income": 3150000,
+        "expanse": 10000
+    },
+    {
+        "id": 11,
+        "date": "Kamis 27-05-2025",
+        "income": 3200000,
+        "expanse": 10000
+    },
+    {
+        "id": 12,
+        "date": "Jumat 28-09-2025",
+        "income": 3000000,
+        "expanse": 10000
+    },
+    {
+        "id": 13,
+        "date": "Sabtu 29-09-2025",
+        "income": 3100000,
+        "expanse": 10000
+    },
+    {
+        "id": 14,
+        "date": "Minggu 30-09-2025",
+        "income": 3050000,
+        "expanse": 10000
+    },
+    {
+        "id": 15,
+        "date": "Senin 01-10-2025",
+        "income": 3300000,
+        "expanse": 10000
+    },
+    {
+        "id": 16,
+        "date": "Selasa 02-10-2025",
+        "income": 2900000,
+        "expanse": 10000
+    },
+    {
+        "id": 17,
+        "date": "Rabu 03-10-2025",
+        "income": 3350000,
+        "expanse": 10000
+    },
+    {
+        "id": 18,
+        "date": "Kamis 04-10-2025",
+        "income": 3400000,
+        "expanse": 10000
+    },
+    {
+        "id": 19,
+        "date": "Jumat 05-10-2025",
+        "income": 3250000,
+        "expanse": 10000
+    },
+    {
+        "id": 20,
+        "date": "Sabtu 06-10-2025",
+        "income": 3100000,
+        "expanse": 10000
+    }
+]
