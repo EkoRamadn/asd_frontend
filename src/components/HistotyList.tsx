@@ -85,7 +85,7 @@ export const HistoryList = ({ data }: HistoryListProps) => {
 
     if (!displayData.length) {
         return (
-            <p className="inria-sans-regular xl">Tidak ada data untuk ditampilkan 😢</p>
+            <p className="inria-sans-regular xl">Tidak ada data untuk ditampilkan </p>
         );
     }
 

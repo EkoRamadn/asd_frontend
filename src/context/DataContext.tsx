@@ -91,7 +91,6 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 
             } catch (err) {
                 console.error('Gagal memuat data:', err);
-                // alert('Gagal mengambil data, mungkin token-nya invalid 😭');
             } finally {
                 setLoading(false);
             }
