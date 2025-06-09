@@ -7,6 +7,11 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
+
+import type {
+    ChartOptions,
+    ChartData,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useState, useMemo } from 'react';
 import { useData } from '../context/DataContext';
@@ -14,12 +19,19 @@ import '../style/chart.css';
 
 ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const options: any = {
+interface Dataset {
+    label: string;
+    data: number[];
+    borderColor: string;
+    hidden?: boolean;
+}
+
+const chartOptions: ChartOptions<'line'> = {
     responsive: true,
     plugins: {
         legend: {
-            display: false
-        }
+            display: false,
+        },
     },
     scales: {
         x: {
@@ -33,12 +45,12 @@ const options: any = {
         y: {
             ticks: {
                 color: '#ffffff',
-                callback: function (value: number) {
+                callback(value: number | string) {
                     return new Intl.NumberFormat('id-ID', {
                         maximumFractionDigits: 1,
                         notation: 'compact',
-                        compactDisplay: 'short'
-                    }).format(value);
+                        compactDisplay: 'short',
+                    }).format(Number(value));
                 },
             },
             grid: {
@@ -50,57 +62,74 @@ const options: any = {
 
 export default function MoodChart() {
     const { dataweek } = useData();
-    const [visibility, setVisibility] = useState([true, true]);
+    const [visibility, setVisibility] = useState<[boolean, boolean]>([true, true]);
 
     const { labels, income, expanse } = useMemo(() => {
-        if (!dataweek) return { labels: [], income: [], expanse: [] };
+        if (!dataweek || dataweek.length === 0) return { labels: [], income: [], expanse: [] };
 
-        const days = dataweek.map(dt => dt.date.split(" ")[0]);
-        const incomeData = dataweek.map(dt => dt.income);
-        const expanseData = dataweek.map(dt => dt.expanse);
+        const days = dataweek.map((dt) => dt.date.split(' ')[0]);
+        const incomeData = dataweek.map((dt) => dt.income);
+        const expanseData = dataweek.map((dt) => dt.expanse);
 
-        return {
-            labels: days,
-            income: incomeData,
-            expanse: expanseData
-        };
+        return { labels: days, income: incomeData, expanse: expanseData };
     }, [dataweek]);
 
-    const baseDatasets = [
-        { label: 'income', data: income, borderColor: '#00ffff' },
-        { label: 'expanse', data: expanse, borderColor: '#ff7f7f' },
-    ];
+    const baseDatasets: Dataset[] = useMemo(() => [
+        {
+            label: 'Income',
+            data: income,
+            borderColor: '#00ffff',
+        },
+        {
+            label: 'Expanse',
+            data: expanse,
+            borderColor: '#ff7f7f',
+        },
+    ], [income, expanse]);
 
-    const datasets = baseDatasets.map((ds, i) => ({
+    const datasets: Dataset[] = baseDatasets.map((ds, i) => ({
         ...ds,
-        hidden: !visibility[i]
+        hidden: !visibility[i],
     }));
 
-    const data = { labels, datasets };
+    const chartData: ChartData<'line'> = {
+        labels,
+        datasets,
+    };
 
     return (
-        <div>
-            <Line data={data} options={options} />
-            <div style={{ marginTop: 10, display: 'flex', marginBottom: '1rem' }}>
-                {baseDatasets.map((ds, i) => (
-                    <div className='inria-sans-light xl groub-checkbox-chart' key={i} style={{ marginRight: 12 }}>
-                        <input
-                            className='checkbox-chart'
-                            id={ds.label}
-                            type="checkbox"
-                            checked={visibility[i]}
-                            onChange={() =>
-                                setVisibility(vis => {
-                                    const copy = [...vis];
-                                    copy[i] = !copy[i];
-                                    return copy;
-                                })
-                            }
-                        />
-                        <label htmlFor={ds.label}>{ds.label}</label>
+        <div className="chart-wrapper">
+            {labels.length > 0 ? (
+                <>
+                    <Line data={chartData} options={chartOptions} />
+                    <div className="inria-sans-light xl chart-checkbox-container">
+                        {baseDatasets.map((ds, i) => (
+                            <div key={i} className="groub-checkbox-chart">
+                                <input
+                                    id={ds.label}
+                                    type="checkbox"
+                                    className="checkbox-chart"
+                                    checked={visibility[i]}
+                                    onChange={() =>
+                                        setVisibility((prev) => {
+                                            const next = [...prev] as [boolean, boolean];
+                                            next[i] = !prev[i];
+                                            return next;
+                                        })
+                                    }
+                                />
+                                <label htmlFor={ds.label} style={{ color: ds.borderColor }}>
+                                    {ds.label}
+                                </label>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
+                </>
+            ) : (
+                <p className="inria-sans-regular xl" style={{ color: 'white', textAlign: 'center' }}>
+                    Tidak ada data minggu ini
+                </p>
+            )}
         </div>
     );
 }

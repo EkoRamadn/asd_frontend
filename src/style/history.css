@@ -1,0 +1,59 @@
+.history-header{
+    /* display: flex; */
+}
+
+.history-header > .info{
+    display: flex;
+    justify-content: space-between;
+    gap: 0.1rem;
+    color: black;
+    margin-bottom: 1rem;
+}
+
+.history-header h1 {
+    font-size: 20px;
+    
+}
+
+.history-header .item{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.history-header .history-left,.history-header .history-right{
+    flex: 1 1 100%;
+    background-color: white;
+    display: flex;
+    /* justify-content: center; */
+    padding-left: 5%;
+    align-items: center;
+    height: 62px;
+}
+
+.history-body form{
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-body form input , .history-body form button{
+    height: 31px;
+}
+
+.history-filter{
+    margin-bottom: 2rem;
+}
+
+.history-header .title{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: .3rem;
+    margin-bottom: 1rem;
+}
+
+.history-header .title img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}

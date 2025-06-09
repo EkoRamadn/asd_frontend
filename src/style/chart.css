@@ -8,3 +8,25 @@
     display: flex;
     align-items: center;
 }
+
+.chart-wrapper {
+  margin-top: 1rem;
+}
+
+.chart-checkbox-container {
+  display: flex;
+  justify-content: start;
+  margin-top: 10px;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.groub-checkbox-chart {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.checkbox-chart {
+  accent-color: #00ffff;
+}

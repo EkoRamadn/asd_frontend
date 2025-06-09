@@ -1,0 +1,110 @@
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import "../style/login.css";
+import back from "../../public/assets/icons/back.png";
+
+const Register = () => {
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [error, setError] = useState("");
+
+    const togglePassword = () => setShowPassword(!showPassword);
+    const toggleConfirm = () => setShowConfirm(!showConfirm);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+
+        if (!username || !email || !password || !confirmPassword) {
+            setError("Semua field wajib diisi 😢");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setError("Password tidak cocok 💔");
+            return;
+        }
+
+
+        const userData = {
+            username,
+            email,
+            password,
+        };
+
+        console.log("User Register:", userData);
+
+
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setError("");
+        alert("Registrasi berhasil, sayang! 💖");
+    };
+
+    return (
+        <div className="container">
+            <div className="login-container">
+                <div className="back-login">
+                    <Link to="/"><img src={back} alt="Kembali" /></Link>
+                </div>
+
+                <div className="login-header">
+                    <div className="login-img"><img src="" alt="" /></div>
+                    <h1 className="login-describ">Buat akun anda.</h1>
+                </div>
+
+                <form className="form-login" onSubmit={handleSubmit}>
+                    {error && <p style={{ color: "red" }}>{error}</p>}
+
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+
+                    <div className="password-wrapper">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button type="button" onClick={togglePassword}>
+                            {showPassword ? "Hide" : "Show"}
+                        </button>
+                    </div>
+
+                    <div className="password-wrapper last">
+                        <input
+                            type={showConfirm ? "text" : "password"}
+                            placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                        <button type="button" onClick={toggleConfirm}>
+                            {showConfirm ? "Hide" : "Show"}
+                        </button>
+                    </div>
+
+                    <button type="submit">Daftar</button>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default Register;

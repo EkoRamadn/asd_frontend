@@ -1,13 +1,13 @@
 .container {
+    position: relative;
     padding-top: 45px;
+    padding-bottom: 50px;
     padding-inline: 8%;
     width: 100vw;
-    height: 100vh;
-    background-color: red;
+    /* height: 100vh; */
     color: white;
-    background: linear-gradient(to bottom right, #010151 25%, #5e00c9, #ff00d4 );
     scrollbar-width:  none;
-    overflow-y: hidden;
+    z-index: 99;
 }
 .header {
     width: 100%;
@@ -102,8 +102,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.history-data-container{
-    height: 40vh;
-    overflow-y: scroll;
-}
 
+.container section {
+    overflow: scroll;
+}

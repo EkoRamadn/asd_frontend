@@ -1,83 +1,105 @@
 import './../style/beranda.css';
-import income from "../../public/assets/icons/income.png";
-import expanse from "../../public/assets/icons/expanse.png";
+import incomeIcon from "../../public/assets/icons/income.png";
+import expanseIcon from "../../public/assets/icons/expanse.png";
 import { useEffect, useState } from 'react';
 import { useData } from '../context/DataContext';
 
 interface DataType {
     id: number;
-    date: string;
+    date: string; // format: "Senin 09-06-2025"
     income: number;
     expanse: number;
 }
 
-export const HistoryList = ({ data }: { data: DataType[] | undefined }) => {
-    const [tmpData, setTmpData] = useState<DataType[] | undefined>(data);
+interface HistoryListProps {
+    data?: DataType[];
+}
+
+const AmountItem = ({
+    icon,
+    label,
+    amount,
+}: {
+    icon: string;
+    label: string;
+    amount: number;
+}) => (
+    <div className={label}>
+        <div className={`${label}-icon menu-icon`}>
+            <img width="100%" src={icon} alt={label} />
+        </div>
+        <span>{`${(amount / 1_000_000).toFixed(1)} JT`}</span>
+    </div>
+);
+
+export const HistoryList = ({ data }: HistoryListProps) => {
+    const [displayData, setDisplayData] = useState<DataType[]>([]);
     const { setDataisWeek } = useData();
 
-
-    const formatJutaan = (amount: number): string => {
-        return `${(amount / 1_000_000).toFixed(1)} JT`;
+    const parseDate = (dateStr: string): Date => {
+        const tanggal = dateStr.split(" ")[1]; // "09-06-2025"
+        const [day, month, year] = tanggal.split("-").map(Number);
+        return new Date(year, month - 1, day);
     };
 
     useEffect(() => {
-        if (data) {
-            const today = new Date();
-            const sevenDaysAgo = new Date();
-            sevenDaysAgo.setDate(today.getDate() - 7);
+        if (!data) return;
 
-            const filtered = data.filter((dt) => {
-                const dataDate = new Date(dt.date.split(" ")[1].split("-").reverse().join("-"));
+        const today = new Date();
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(today.getDate() - 7);
 
-                return dataDate >= sevenDaysAgo && dataDate <= today;
-            });
+        const recent = data.filter((dt) => {
+            const date = parseDate(dt.date);
+            return date >= sevenDaysAgo && date <= today;
+        });
 
-            if (filtered.length === 0) {
-                const closestData = data
-                    .map((current) => {
-                        const currentDataDate = new Date(current.date.split(" ")[1].split("-").reverse().join("-"));
+        let finalData: DataType[];
 
-                        if (currentDataDate < today) {
-                            return {
-                                ...current,
-                                distance: Math.abs(currentDataDate.getTime() - today.getTime())
-                            };
-                        }
-                        return null;
-                    })
-                    .filter((item) => item !== null)
-                    .sort((a, b) => (a!.distance - b!.distance))
-                    .slice(0, 7);
+        if (recent.length > 0) {
+            finalData = recent;
+        } else {
+            const closest = data
+                .map((dt) => {
+                    const date = parseDate(dt.date);
+                    if (date < today) {
+                        return {
+                            ...dt,
+                            distance: Math.abs(today.getTime() - date.getTime()),
+                        };
+                    }
+                    return null;
+                })
+                .filter((d): d is DataType & { distance: number } => d !== null)
+                .sort((a, b) => a.distance - b.distance)
+                .slice(0, 7);
 
-                setTmpData(closestData);
-                setDataisWeek(closestData)
-            } else {
-                setTmpData(filtered);
-                setDataisWeek(filtered)
-            }
+            finalData = closest;
         }
+
+        setDisplayData(finalData);
+        setDataisWeek(finalData);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
+
+    if (!displayData.length) {
+        return (
+            <p className="inria-sans-regular xl">Tidak ada data untuk ditampilkan 😢</p>
+        );
+    }
+
     return (
         <ul className="history-data-container">
-            {tmpData?.map((dt) => (
-                <li key={dt.id} className="fade-in">
+            {displayData.map(({ id, date, income, expanse }) => (
+                <li key={id} className="fade-in">
                     <div className="history-item">
                         <div className="inria-sans-regular xl history-rigth">
-                            <span>{dt.date}</span>
+                            <span>{date}</span>
                         </div>
                         <div className="inria-sans-regular xl history-left">
-                            <div className="income">
-                                <div className="income-icon menu-icon">
-                                    <img width="100%" src={income} alt="income" />
-                                </div>
-                                <span>{formatJutaan(dt.income)}</span>
-                            </div>
-                            <div className="expanse">
-                                <div className="expanse-icon menu-icon">
-                                    <img width="100%" src={expanse} alt="expanse" />
-                                </div>
-                                <span>{formatJutaan(dt.expanse)}</span>
-                            </div>
+                            <AmountItem icon={incomeIcon} label="income" amount={income} />
+                            <AmountItem icon={expanseIcon} label="expanse" amount={expanse} />
                         </div>
                     </div>
                 </li>

@@ -44,7 +44,7 @@ const Beranda = () => {
                     const target = entry.target as HTMLElement;
                     if (entry.isIntersecting) {
                         target.classList.add('show');
-                        // Bisa hapus observer kalau hanya ingin sekali tampil
+                       
                         observer.unobserve(target);
                     }
                 });
@@ -57,7 +57,6 @@ const Beranda = () => {
 
     return (
         <div className="container">
-            {/* Pass ref ke SideMenu */}
             {menuActive && <div className="backdrop" onClick={closeMenu} />}
             <div className="side" ref={sideMenuRef}>
                 <SideMenu />
