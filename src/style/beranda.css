@@ -4,29 +4,31 @@
     padding-bottom: 50px;
     padding-inline: 8%;
     width: 100vw;
-    /* height: 100vh; */
     color: white;
-    scrollbar-width:  none;
+    scrollbar-width: none;
     z-index: 99;
 }
+
 .header {
     width: 100%;
     margin-bottom: 1rem;
 }
 
-.header, .menu-header, .history-item{
+.header,
+.menu-header,
+.history-item {
     display: flex;
     justify-content: space-between;
 }
 
-.menu-describ{
+.menu-describ {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-left: 10px;
 }
 
-.menu{
+.menu {
     margin-bottom: 1rem;
 }
 
@@ -37,7 +39,7 @@
     height: 49px;
 }
 
-.menu-icon{
+.menu-icon {
     width: 55px;
     height: 55px;
     background-color: white;
@@ -47,13 +49,13 @@
     cursor: pointer;
 }
 
-.menu-container{
-    display:flex;
+.menu-container {
+    display: flex;
     justify-content: center;
     gap: 2rem;
 }
 
-.history .menu-icon{
+.history .menu-icon {
     width: 15px;
     height: 15px;
 }
@@ -62,47 +64,107 @@
     padding-inline: 18px;
     background-color: white;
     color: black;
-    align-items:  center;
+    align-items: center;
     cursor: pointer;
     height: 49px;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 }
 
 .history-left {
     display: flex;
     gap: 1rem;
 }
-.income,.expanse{
+
+.income,
+.expanse {
     display: flex;
-    gap: .5rem;
+    gap: 0.5rem;
 }
-.title-header{
+
+.title-header {
     margin-bottom: 1rem;
 }
 
-.side{
+.side {
     z-index: 99;
-    transition: all .5s linear;
+    transition: all 0.5s linear;
     position: fixed;
     top: 0;
-    left:  -100%;
+    left: -100%;
 }
 
 .side.active {
-  left: 0; 
+    left: 0;
 }
-
 
 .backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
 }
-
 
 .container section {
     overflow: scroll;
+}
+
+.history > a {
+    color: #fff;
+}
+
+.container {
+    position: relative;
+    padding-top: 45px;
+    padding-bottom: 50px;
+    padding-inline: 8%;
+    max-width: 100%; /* ✅ hindari horizontal scroll */
+    color: white;
+    overflow-x: hidden;
+    z-index: 99;
+}
+
+/* Tambahkan jarak antara menu deskripsi dan notif */
+.menu-header {
+    align-items: center;
+}
+
+/* Tambahkan jarak antar header */
+.menu-describ h1 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+.menu-describ h2 {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* Biar chart nggak dempet ke atas */
+.container > section > div:first-child {
+    margin-bottom: 1rem;
+}
+
+/* Responsive icon di menu */
+.menu-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(255,255,255,0.2);
+}
+
+/* History item jarak antar baris biar lebih lega */
+.history-item {
+    padding: 10px 16px;
+    border-radius: 8px;
+}
+
+/* Text Selengkapnya biar enak diklik dan elegan */
+.history > a {
+    color: #fff;
+    display: inline-block;
+    margin-top: 8px;
+    font-weight: bold;
+    text-decoration: underline;
 }

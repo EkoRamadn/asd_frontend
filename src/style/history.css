@@ -1,6 +1,4 @@
-.history-header{
-    /* display: flex; */
-}
+
 
 .history-header > .info{
     display: flex;
@@ -36,9 +34,6 @@
     justify-content: space-between;
 }
 
-.history-body form input , .history-body form button{
-    height: 31px;
-}
 
 .history-filter{
     margin-bottom: 2rem;
@@ -47,7 +42,6 @@
 .history-header .title{
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     gap: .3rem;
     margin-bottom: 1rem;
 }
@@ -57,3 +51,47 @@
     height: 40px;
     border-radius: 50%;
 }
+
+.history-filter form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.history-filter input {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100px;
+}
+
+.history-filter button {
+    padding: 6px 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+
+.loading-text {
+    text-align: center;
+    font-size: 16px;
+    padding: 20px;
+    font-family: 'Inria Sans', sans-serif;
+    color: #555;
+}
+
+.history-filter select,
+.history-filter input,
+.history-filter button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+

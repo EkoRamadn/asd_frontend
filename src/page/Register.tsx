@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../style/login.css";
 import back from "../../public/assets/icons/back.png";
+import Swal from "sweetalert2";
 
 const Register = () => {
     const [username, setUsername] = useState("");
@@ -15,17 +16,17 @@ const Register = () => {
     const togglePassword = () => setShowPassword(!showPassword);
     const toggleConfirm = () => setShowConfirm(!showConfirm);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
 
         if (!username || !email || !password || !confirmPassword) {
-            setError("Semua field wajib diisi 😢");
+            setError("Semua field wajib diisi ");
             return;
         }
 
         if (password !== confirmPassword) {
-            setError("Password tidak cocok 💔");
+            setError("Password tidak cocok ");
             return;
         }
 
@@ -44,7 +45,37 @@ const Register = () => {
         setPassword("");
         setConfirmPassword("");
         setError("");
-        alert("Registrasi berhasil, sayang! 💖");
+
+        try {
+            const res = await fetch("/api/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: username, email: email, password: password }),
+            })
+            const data = await res.json();
+
+            if (!res.ok) {
+                setError(data.error || "Login gagal");
+                return;
+            }
+
+            Swal.fire({
+                title: "INFO",
+                text: "Register Berhasil",
+                icon: "success",
+                confirmButtonText: "Ok!s"
+            });
+            return;
+
+        } catch (error) {
+            Swal.fire({
+                title: "INFO",
+                text: `Register Gagal ${error}!`,
+                icon: "error",
+                confirmButtonText: "Ok!"
+            });
+            setError("Terjadi kesalahan server ");
+        }
     };
 
     return (

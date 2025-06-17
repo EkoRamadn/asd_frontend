@@ -1,0 +1,72 @@
+.tambahdata{
+     padding-top: 45px;
+    padding-bottom: 50px;
+    padding-inline: 8%;
+    width: 100vw;
+    color: white;
+}
+
+.tambahdata-head h2 {
+  margin-bottom: 1rem;
+  font-size: 24px;
+}
+
+.tambahdata .form-group {
+  margin-bottom: 2rem;
+}
+
+.tambahdata .input-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tambahdata .input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #dcdcdc;
+  color: black;
+  font-size: 14px;
+}
+
+.tambahdata .input.full {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.tambahdata button {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  background-color: #5e60ce;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.tambahdata button:hover {
+  background-color: #6930c3;
+}
+
+.tambahdata .back {
+  border-radius: 50%;
+}
+
+.tambahdata .back img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.tambahdata select option {
+    font-size: 1rem;
+}
+
+.tambahdata .hapus-btn{
+  margin-bottom: 1rem;
+}

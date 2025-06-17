@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import menu from "../../public/assets/icons/menu-bar.png";
 import nontif from "../../public/assets/icons/nontif.png";
 import income from "../../public/assets/icons/income.png";
@@ -8,12 +8,21 @@ import SideMenu from "../components/SideMenu";
 import { useData } from "../context/DataContext";
 import { HistoryList } from "../components/HistotyList";
 import MyBarChart from "../components/chart";
+import { Link } from "react-router-dom";
 
 const Beranda = () => {
-
-    const { data } = useData();
+    const { data, loading } = useData();
     const sideMenuRef = useRef<HTMLDivElement>(null);
     const [menuActive, setMenuActive] = useState(false);
+
+    useEffect(() => {
+        if (data && data.length > 0) {
+            const timeout = setTimeout(() => {
+                // Show content after 1 second if data is loaded
+            }, 1000);
+            return () => clearTimeout(timeout);
+        }
+    }, [data]);
 
     const toggleMenu = () => {
         const menu = sideMenuRef.current;
@@ -22,9 +31,6 @@ const Beranda = () => {
             setMenuActive(menu.classList.contains("active"));
         }
     };
-    useRef(() => {
-        console.log(data)
-    })
 
     const closeMenu = () => {
         const menu = sideMenuRef.current;
@@ -34,26 +40,9 @@ const Beranda = () => {
         }
     };
 
-    useEffect(() => {
-        const items = document.querySelectorAll('.fade-in');
-        console.log(items)
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    const target = entry.target as HTMLElement;
-                    if (entry.isIntersecting) {
-                        target.classList.add('show');
-                       
-                        observer.unobserve(target);
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
-
-        items.forEach((el) => observer.observe(el));
-    }, []);
+    if (loading) {
+        return <div className="load">Loading data.</div>;
+    }
 
     return (
         <div className="container">
@@ -69,40 +58,48 @@ const Beranda = () => {
                             <img src={menu} alt="menu-icon" />
                         </div>
                         <div className="menu-describ">
-                            <h1 className="inria-sans-regular l">Hello Anonim</h1>
+                            <h1 className="inria-sans-regular l">
+                                Hello {localStorage.getItem("username")}
+                            </h1>
                             <h2 className="inria-sans-regular xl">
-                                {new Date().toLocaleDateString('id-ID', {
-                                    weekday: 'long',
-                                    day: 'numeric',
-                                    month: 'long',
-                                    year: 'numeric'
+                                {new Date().toLocaleDateString("id-ID", {
+                                    weekday: "long",
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric",
                                 })}
                             </h2>
-
                         </div>
                     </div>
                     <div className="nontif-icon header-icon">
                         <img src={nontif} alt="nontif-icon" />
                     </div>
                 </div>
+
                 <div>
                     <MyBarChart />
                 </div>
+
                 <div className="menu">
                     <h2 className="title-header inria-sans-regular xl">Menu</h2>
                     <div className="menu-container">
-                        <div className="income-icon menu-icon">
-                            <img src={income} alt="" />
-                        </div>
-                        <div className="expanse-icon menu-icon">
-                            <img src={expanse} alt="" />
-                        </div>
+                        <Link to="/tambahpemasukan">
+                            <div className="income-icon menu-icon">
+                                <img src={income} alt="income-icon" />
+                            </div>
+                        </Link>
+                        <Link to="/pembelianbahan">
+                            <div className="expanse-icon menu-icon">
+                                <img src={expanse} alt="expanse-icon" />
+                            </div>
+                        </Link>
                     </div>
-
                 </div>
+
                 <div className="history">
                     <h2 className="title-header inria-sans-regular xl">History</h2>
-                    <HistoryList data={data} />
+                    <HistoryList data={data} isWeek={true} />
+                    <Link to="/history">Selengkapnya</Link>
                 </div>
             </section>
         </div>

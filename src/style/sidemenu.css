@@ -9,16 +9,20 @@
 }
 
 
-.side-menu .profile {
+.side-menu .profile-menu {
   display: flex;
   flex-direction: column;
 }
 
-.side-menu .profile img {
+.side-menu .profile-menu img {
   width: 66px;
   height: 66px;
   border-radius: 50%;
   margin-bottom: 1rem;
+}
+
+.side-menu .profile-menu a{
+  color: white;
 }
 
 .menu-links {

@@ -2,17 +2,14 @@ import './../style/beranda.css';
 import incomeIcon from "../../public/assets/icons/income.png";
 import expanseIcon from "../../public/assets/icons/expanse.png";
 import { useEffect, useState } from 'react';
+import { type DataType } from '../interface/interface.';
+import { getDataWeek } from '../utils/dataWeek';
 import { useData } from '../context/DataContext';
 
-interface DataType {
-    id: number;
-    date: string; // format: "Senin 09-06-2025"
-    income: number;
-    expanse: number;
-}
 
 interface HistoryListProps {
-    data?: DataType[];
+    data: DataType[] | [];
+    isWeek: boolean;
 }
 
 const AmountItem = ({
@@ -32,56 +29,38 @@ const AmountItem = ({
     </div>
 );
 
-export const HistoryList = ({ data }: HistoryListProps) => {
-    const [displayData, setDisplayData] = useState<DataType[]>([]);
-    const { setDataisWeek } = useData();
+export const HistoryList = ({ data, isWeek }: HistoryListProps) => {
+    const [displayData, setDisplayData] = useState<DataType[] | []>(data);
+    const { setDatedata } = useData();
 
-    const parseDate = (dateStr: string): Date => {
-        const tanggal = dateStr.split(" ")[1]; // "09-06-2025"
-        const [day, month, year] = tanggal.split("-").map(Number);
-        return new Date(year, month - 1, day);
-    };
+    function ubahFormatTanggal(input: string): string {
+        const parts = input.trim().split(" ");
+        if (parts.length !== 2) return "";
+
+        const [tanggalStr, bulanStr, tahunStr] = parts[1].split("-");
+
+        const tanggal = tanggalStr.padStart(2, "0");
+        const bulan = bulanStr.padStart(2, "0");
+        const tahun = tahunStr;
+
+        return `${tahun}-${bulan}-${tanggal}`;
+    }
+
+    function hadleClick(date: string) {
+        document.getElementById('detail')?.classList.add('show');
+        const tmp = ubahFormatTanggal(date)
+        setDatedata(tmp)
+    }
+
 
     useEffect(() => {
-        if (!data) return;
-
-        const today = new Date();
-        const sevenDaysAgo = new Date();
-        sevenDaysAgo.setDate(today.getDate() - 7);
-
-        const recent = data.filter((dt) => {
-            const date = parseDate(dt.date);
-            return date >= sevenDaysAgo && date <= today;
-        });
-
-        let finalData: DataType[];
-
-        if (recent.length > 0) {
-            finalData = recent;
+        if (isWeek) {
+            const finalData = getDataWeek(data);
+            setDisplayData(finalData);
         } else {
-            const closest = data
-                .map((dt) => {
-                    const date = parseDate(dt.date);
-                    if (date < today) {
-                        return {
-                            ...dt,
-                            distance: Math.abs(today.getTime() - date.getTime()),
-                        };
-                    }
-                    return null;
-                })
-                .filter((d): d is DataType & { distance: number } => d !== null)
-                .sort((a, b) => a.distance - b.distance)
-                .slice(0, 7);
-
-            finalData = closest;
+            setDisplayData(data);
         }
-
-        setDisplayData(finalData);
-        setDataisWeek(finalData);
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data]);
+    }, [data, isWeek]);
 
     if (!displayData.length) {
         return (
@@ -92,8 +71,8 @@ export const HistoryList = ({ data }: HistoryListProps) => {
     return (
         <ul className="history-data-container">
             {displayData.map(({ id, date, income, expanse }) => (
-                <li key={id} className="fade-in">
-                    <div className="history-item">
+                <li key={id} className="fade-in" onClick={() => hadleClick(date)}>
+                    <div className="history-item" >
                         <div className="inria-sans-regular xl history-rigth">
                             <span>{date}</span>
                         </div>

@@ -7,6 +7,9 @@ import Login from './page/Login';
 import PrivateRoute from './components/PrivateRoute'; // Buat file ini
 import Register from './page/Register';
 import History from './page/History';
+import Profile from './page/Profile';
+import TambahData from './page/TambahData';
+import Pembelianbahan from './page/pembelianbahan';
 
 function App() {
   return (
@@ -16,12 +19,16 @@ function App() {
         {/* <Route path='/' element={<Beranda />} /> */}
         {/* <Route path='/login' element={<Login />} /> */}
         <Route path='/history' element={<History />} />
-        <Route path='/' element={<Login />} />
+        <Route path='/pembelianbahan' element={<Pembelianbahan />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/about' element={<About />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/tambahpemasukan' element={<TambahData />} />
+        {/* <Route path='/detail/:date' element={<></>} /> */}
 
         {/* Private */}
-        <Route path='/beranda' element={
+        <Route path='/' element={
           <PrivateRoute>
             <Beranda />
           </PrivateRoute>

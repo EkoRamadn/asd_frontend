@@ -5,9 +5,9 @@ import "../style/sidemenu.css";
 const SideMenu = () => {
     return (
         <aside className="side-menu">
-            <div className="profile">
+            <div className="profile-menu">
                 <img src={profile} alt="Profile" />
-                <h2 className="inria-sans-bold">Anonim</h2>
+                <Link to="/profile" className="inria-sans-bold">{localStorage.getItem('username')}</Link>
             </div>
             <ul className="menu-links">
                 <li className="inria-sans-regular"><Link to="/setting">Setting</Link></li>
