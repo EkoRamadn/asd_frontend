@@ -81,7 +81,7 @@ const TambahData = () => {
         );
 
         if (dombaValid.length === 0 && pakanValid.length === 0) {
-            alert("Mohon isi setidaknya satu data domba atau pakan ya sayang 🥺");
+            alert("Mohon isi setidaknya satu data domba atau pakan");
             return;
         }
 
@@ -103,7 +103,7 @@ const TambahData = () => {
             ]);
         } catch (error) {
             console.error("Gagal submit data:", error);
-            alert("Terjadi kesalahan saat submit data 😢");
+            alert("Terjadi kesalahan saat submit data ");
         }
     };
 

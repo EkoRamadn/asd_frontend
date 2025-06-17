@@ -63,7 +63,7 @@ const Pembelianbahan = () => {
         );
 
         if (pakanValid.length === 0) {
-            alert("Mohon isi setidaknya satu data domba atau pakan ");
+            alert("Mohon isi setidaknya satu data bahan baku ");
             return;
         }
 
