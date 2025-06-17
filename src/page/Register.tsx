@@ -3,6 +3,7 @@ import { useState } from "react";
 import "../style/login.css";
 import back from "../../public/assets/icons/back.png";
 import Swal from "sweetalert2";
+const baseURL = import.meta.env.VITE_API_URL;
 
 const Register = () => {
     const [username, setUsername] = useState("");
@@ -47,7 +48,7 @@ const Register = () => {
         setError("");
 
         try {
-            const res = await fetch("/api/register", {
+            const res = await fetch(`${baseURL}/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username: username, email: email, password: password }),

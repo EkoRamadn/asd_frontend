@@ -1,9 +1,10 @@
 import { type DataType, type RawDataType, type DetailDataType, type DombaItem, type PakanItem } from "../interface/interface.";
+const baseURL = import.meta.env.VITE_API_URL;
 
 export class Dataquery {
     static async getData(month: number, year: number, token: string): Promise<DataType[]> {
         try {
-            const res = await fetch(`/api/data/bulanan?bulan=${month + 1}&tahun=${year}`, {
+            const res = await fetch(`${baseURL}/data/bulanan?bulan=${month + 1}&tahun=${year}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -55,7 +56,7 @@ export class Dataquery {
     }
     static async getDataDetail(date: string, token: string): Promise<DetailDataType | Error> {
         try {
-            const res = await fetch(`/api/data/harian?tanggal=${encodeURIComponent(date)}`, {
+            const res = await fetch(`${baseURL}/data/harian?tanggal=${encodeURIComponent(date)}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -84,7 +85,7 @@ export class Dataquery {
 
     static async addTransactionDomba(data: DombaItem, token: string) {
         try {
-            const res = await fetch(`/api/tambah/insertPenjualanDomba`, {
+            const res = await fetch(`${baseURL}/tambah/insertPenjualanDomba`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -119,7 +120,7 @@ export class Dataquery {
     }
     static async addTransactionPakan(data: PakanItem, token: string) {
         try {
-            const res = await fetch(`/api/tambah/InsertPenjualanPakan`, {
+            const res = await fetch(`${baseURL}/tambah/InsertPenjualanPakan`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -154,7 +155,7 @@ export class Dataquery {
     }
     static async addTransactionBahanBaku(data: PakanItem, token: string) {
         try {
-            const res = await fetch(`/api/tambah/insertPembelianBahan`, {
+            const res = await fetch(`${baseURL}/tambah/insertPembelianBahan`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../style/login.css";
+const baseURL = import.meta.env.VITE_API_URL;
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ const Login = () => {
         if (localStorage.getItem('token')) {
             navigate('/')
         }
+        console.log(baseURL)
     })
 
 
@@ -26,7 +28,7 @@ const Login = () => {
         }
 
         try {
-            const res = await fetch("/api/login", {
+            const res = await fetch(`${baseURL}/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: email, password: password }),

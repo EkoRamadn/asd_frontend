@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Cropper, { type Area } from "react-easy-crop";
 import getCroppedImg from "../utils/cropImage"; // fungsi versi Blob
 import { Link } from "react-router-dom";
+const baseURL = import.meta.env.VITE_API_URL;
 
 interface ProfileData {
     username: string;
@@ -24,7 +25,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const res = await fetch("/api/getprofile", {
+                const res = await fetch(`${baseURL}/getprofile`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
@@ -75,7 +76,7 @@ const Profile = () => {
 
             const token = localStorage.getItem("token");
 
-            const res = await fetch("/api/avatar/uploadHandler", {
+            const res = await fetch(`${baseURL}/avatar/uploadHandler`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
