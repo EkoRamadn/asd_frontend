@@ -9,7 +9,7 @@ import Register from './page/Register';
 import History from './page/History';
 import Profile from './page/Profile';
 import TambahData from './page/TambahData';
-import Pembelianbahan from './page/pembelianbahan';
+import Pembelianbahan from './page/Pembelianbahan';
 
 function App() {
   return (
