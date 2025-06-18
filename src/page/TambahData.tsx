@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../style/tambahData.css";
 import back from "../../public/assets/icons/back.png";
 import { Dataquery } from "../lib/Dataquery";
+import Swal from "sweetalert2";
 
 interface DombaItem {
     jenisDomba: string;
@@ -39,6 +40,13 @@ const TambahData = () => {
             total_harga: "",
         },
     ]);
+
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        navigate("/");
+        window.location.reload();
+    };
 
     useEffect(() => {
         const savedToken = localStorage.getItem("token");
@@ -94,7 +102,12 @@ const TambahData = () => {
                 await Dataquery.addTransactionPakan(data, token);
             }
 
-            alert("Data berhasil ditambahkan! 🐑🌾");
+            Swal.fire({
+                title: "INFO",
+                text: `Data Berhasil Tercatat`,
+                icon: "success",
+                confirmButtonText: "Ok!"
+            });
             setDombaList([
                 { jenisDomba: "", kondisi: "", jumlahDomba: "", hargaDomba: "", totalDomba: "" },
             ]);
@@ -103,15 +116,20 @@ const TambahData = () => {
             ]);
         } catch (error) {
             console.error("Gagal submit data:", error);
-            alert("Terjadi kesalahan saat submit data ");
+            Swal.fire({
+                title: "INFO",
+                text: `Data Gagal Tercatat`,
+                icon: "error",
+                confirmButtonText: "Ok!"
+            });
         }
     };
 
     return (
         <div className="tambahdata">
-            <Link className="back" to="/">
+            <button className="back" onClick={handleBack}>
                 <img width="100%" src={back} alt="Kembali" />
-            </Link>
+            </button>
 
             <div className="tambahdata-container">
                 <div className="tambahdata-head">

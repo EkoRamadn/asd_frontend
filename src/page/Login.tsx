@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../style/login.css";
+import Swal from "sweetalert2";
 const baseURL = import.meta.env.VITE_API_URL;
 
 const Login = () => {
@@ -47,6 +48,12 @@ const Login = () => {
         } catch (err) {
             console.error("Gagal login:", err);
             setError("Terjadi kesalahan server ");
+            Swal.fire({
+                title: "INFO",
+                text: `Login Gagal ${error}!`,
+                icon: "error",
+                confirmButtonText: "Ok!"
+            });
         }
     };
 

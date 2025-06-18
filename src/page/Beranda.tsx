@@ -9,6 +9,7 @@ import { useData } from "../context/DataContext";
 import { HistoryList } from "../components/HistotyList";
 import MyBarChart from "../components/chart";
 import { Link } from "react-router-dom";
+import Loading from "../components/Loading";
 
 const Beranda = () => {
     const { data, loading } = useData();
@@ -41,7 +42,7 @@ const Beranda = () => {
     };
 
     if (loading) {
-        return <div className="load">Loading data.</div>;
+        return <div className="load containerin"><Loading /></div>;
     }
 
     return (

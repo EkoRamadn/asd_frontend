@@ -37,7 +37,9 @@
   margin-top: 0.5rem;
 }
 
-.tambahdata button {
+
+
+.tambahdata button:not(.back) {
   margin-top: 1rem;
   padding: 10px 20px;
   background-color: #5e60ce;
@@ -49,12 +51,15 @@
   transition: background 0.3s;
 }
 
-.tambahdata button:hover {
+.tambahdata button:hover:not(.back) {
   background-color: #6930c3;
 }
 
 .tambahdata .back {
   border-radius: 50%;
+  background: none;
+  border: none;
+  outline: none;
 }
 
 .tambahdata .back img {

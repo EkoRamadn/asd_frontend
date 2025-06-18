@@ -2,14 +2,16 @@ import "../style/profile.css";
 import back from "../../public/assets/icons/back.png";
 import { useEffect, useRef, useState, useCallback } from "react";
 import Cropper, { type Area } from "react-easy-crop";
-import getCroppedImg from "../utils/cropImage"; // fungsi versi Blob
+import getCroppedImg from "../utils/cropImage";
 import { Link } from "react-router-dom";
+
 const baseURL = import.meta.env.VITE_API_URL;
 
 interface ProfileData {
     username: string;
     email: string;
     file?: string;
+    avatar?: string; // tambahkan jika kamu pakai 'avatar' juga
 }
 
 const Profile = () => {
@@ -36,7 +38,6 @@ const Profile = () => {
                 const data = await res.json();
                 setDat(data[0]);
 
-                // Tampilkan avatar jika ada
                 if (data[0].avatar) {
                     setAvatar(`/assets/${data[0].avatar}`);
                 }
@@ -66,13 +67,13 @@ const Profile = () => {
         setUploading(true);
 
         try {
-            const blob = await getCroppedImg(imageSrc, croppedAreaPixels); // blob image
+            const blob = await getCroppedImg(imageSrc, croppedAreaPixels);
             const previewUrl = URL.createObjectURL(blob);
-            setAvatar(previewUrl); // Preview sementara
-            setImageSrc(null); // Tutup modal crop
+            setAvatar(previewUrl);
+            setImageSrc(null);
 
             const formData = new FormData();
-            formData.append("gambar", blob); // ✅ sesuai backend field: 'gambar'
+            formData.append("gambar", blob);
 
             const token = localStorage.getItem("token");
 
@@ -85,9 +86,8 @@ const Profile = () => {
             });
 
             if (!res.ok) throw new Error("Upload gagal");
-            const result = await res.json();
 
-            // Setelah simpan, tampilkan avatar dari server
+            const result = await res.json();
             setAvatar(`/assets/${result.filename}`);
             alert("Avatar berhasil disimpan! 🎉");
         } catch (err) {
@@ -112,7 +112,15 @@ const Profile = () => {
                     <div className="info">
                         <div className="content">
                             <div className="img" onClick={openFilePicker}>
-                                <img src={avatar || `https://asd-backend.vercel.app/api/avatar/image?file=${dat?.file}` || "/default-avatar.png"} alt="Avatar" />
+                                <img
+                                    src={
+                                        avatar ??
+                                        (dat?.file
+                                            ? `https://asd-backend.vercel.app/api/avatar/image?file=${encodeURIComponent(dat.file)}`
+                                            : "/default-avatar.png")
+                                    }
+                                    alt="Avatar"
+                                />
                                 <input
                                     type="file"
                                     accept="image/*"

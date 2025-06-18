@@ -168,3 +168,22 @@
     font-weight: bold;
     text-decoration: underline;
 }
+ 
+.containerin{
+    background-color: white;
+}
+.containerin .load{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100px;
+    height: 100px;
+    background: transparent;
+}
+
+.loadinghistory .load{
+    background-color: transparent;
+    width: 100px;
+    margin-inline: auto;
+}

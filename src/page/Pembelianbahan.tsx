@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../style/tambahData.css";
 import back from "../../public/assets/icons/back.png";
 import { Dataquery } from "../lib/Dataquery";
-
+import Swal from "sweetalert2";
 
 interface PakanItem {
     jenis_id: string;
@@ -14,7 +14,7 @@ interface PakanItem {
 
 const Pembelianbahan = () => {
     const [token, setToken] = useState<string | null>(null);
-
+    const navigate = useNavigate();
 
     const [pakanList, setPakanList] = useState<PakanItem[]>([
         {
@@ -63,33 +63,46 @@ const Pembelianbahan = () => {
         );
 
         if (pakanValid.length === 0) {
-            alert("Mohon isi setidaknya satu data bahan baku ");
+            alert("Mohon isi setidaknya satu data bahan baku");
             return;
         }
 
         try {
-
-
             for (const data of pakanValid) {
                 await Dataquery.addTransactionBahanBaku(data, token);
             }
 
-            alert("Data berhasil ditambahkan! 🐑🌾");
+            Swal.fire({
+                title: "INFO",
+                text: `Data Berhasil Tercatat`,
+                icon: "success",
+                confirmButtonText: "Ok!"
+            });
 
             setPakanList([
                 { jenis_id: "", jumblah: "", harga: "", total_harga: "" },
             ]);
         } catch (error) {
             console.error("Gagal submit data:", error);
-            alert("Terjadi kesalahan saat submit data ");
+            Swal.fire({
+                title: "INFO",
+                text: `Data Gagal Tercatat`,
+                icon: "error",
+                confirmButtonText: "Ok!"
+            });
         }
+    };
+
+    const handleBackClick = () => {
+        navigate("/");
+        window.location.reload();
     };
 
     return (
         <div className="tambahdata">
-            <Link className="back" to="/">
+            <button className="back" onClick={handleBackClick}>
                 <img width="100%" src={back} alt="Kembali" />
-            </Link>
+            </button>
 
             <div className="tambahdata-container">
                 <div className="tambahdata-head">
@@ -97,9 +110,6 @@ const Pembelianbahan = () => {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-
-
-                    {/* Pakan Section */}
                     <div className="form-group">
                         <label>Bahan Baku</label>
                         {pakanList.map((pakan, idx) => (
@@ -108,7 +118,17 @@ const Pembelianbahan = () => {
                                     <select
                                         name="jenis_id"
                                         value={pakan.jenis_id}
-                                        onChange={(e) => handleChange(pakanList, setPakanList, idx, e, "jumblah", "harga", "total_harga")}
+                                        onChange={(e) =>
+                                            handleChange(
+                                                pakanList,
+                                                setPakanList,
+                                                idx,
+                                                e,
+                                                "jumblah",
+                                                "harga",
+                                                "total_harga"
+                                            )
+                                        }
                                         className="input"
                                     >
                                         <option value="">Pilih Jenis</option>
@@ -127,7 +147,17 @@ const Pembelianbahan = () => {
                                         type="number"
                                         placeholder="Jumlah"
                                         value={pakan.jumblah}
-                                        onChange={(e) => handleChange(pakanList, setPakanList, idx, e, "jumblah", "harga", "total_harga")}
+                                        onChange={(e) =>
+                                            handleChange(
+                                                pakanList,
+                                                setPakanList,
+                                                idx,
+                                                e,
+                                                "jumblah",
+                                                "harga",
+                                                "total_harga"
+                                            )
+                                        }
                                         className="input"
                                     />
 
@@ -136,7 +166,17 @@ const Pembelianbahan = () => {
                                         type="number"
                                         placeholder="Harga"
                                         value={pakan.harga}
-                                        onChange={(e) => handleChange(pakanList, setPakanList, idx, e, "jumblah", "harga", "total_harga")}
+                                        onChange={(e) =>
+                                            handleChange(
+                                                pakanList,
+                                                setPakanList,
+                                                idx,
+                                                e,
+                                                "jumblah",
+                                                "harga",
+                                                "total_harga"
+                                            )
+                                        }
                                         className="input"
                                     />
                                 </div>
@@ -151,13 +191,38 @@ const Pembelianbahan = () => {
                                 />
 
                                 {pakanList.length > 1 && (
-                                    <button type="button" onClick={() => setPakanList(pakanList.filter((_, i) => i !== idx))} className="hapus-btn">
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setPakanList(
+                                                pakanList.filter(
+                                                    (_, i) => i !== idx
+                                                )
+                                            )
+                                        }
+                                        className="hapus-btn"
+                                    >
                                         Hapus
                                     </button>
                                 )}
                             </div>
                         ))}
-                        <button type="button" onClick={() => setPakanList([...pakanList, { jenis_id: "", jumblah: "", harga: "", total_harga: "" }])} className="tambah-btn">
+
+                        <button
+                            type="button"
+                            onClick={() =>
+                                setPakanList([
+                                    ...pakanList,
+                                    {
+                                        jenis_id: "",
+                                        jumblah: "",
+                                        harga: "",
+                                        total_harga: "",
+                                    },
+                                ])
+                            }
+                            className="tambah-btn"
+                        >
                             Tambah Pakan
                         </button>
                     </div>

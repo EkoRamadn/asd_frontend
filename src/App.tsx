@@ -10,28 +10,47 @@ import History from './page/History';
 import Profile from './page/Profile';
 import TambahData from './page/TambahData';
 import Pembelianbahan from './page/Pembelianbahan';
+import NotFound from './page/NotFound';
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Public */}
-        {/* <Route path='/' element={<Beranda />} /> */}
-        {/* <Route path='/login' element={<Login />} /> */}
-        <Route path='/history' element={<History />} />
-        <Route path='/pembelianbahan' element={<Pembelianbahan />} />
-        <Route path='/profile' element={<Profile />} />
+        {/* public */}
         <Route path='/login' element={<Login />} />
         <Route path='/about' element={<About />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/tambahpemasukan' element={<TambahData />} />
-        {/* <Route path='/detail/:date' element={<></>} /> */}
+
 
         {/* Private */}
         <Route path='/' element={
           <PrivateRoute>
             <Beranda />
           </PrivateRoute>
+        } />
+        <Route path='/tambahpemasukan' element={
+          <PrivateRoute>
+            <TambahData />
+          </PrivateRoute>
+        } />
+        <Route path='/pembelianbahan' element={
+          <PrivateRoute>
+            <Pembelianbahan />
+          </PrivateRoute>
+        } />
+        <Route path='/history' element={
+          <PrivateRoute>
+            <History />
+          </PrivateRoute>
+        } />
+        <Route path='/profile' element={
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        } />
+
+        <Route path='*' element={
+          <NotFound />
         } />
       </Routes>
     </Router>

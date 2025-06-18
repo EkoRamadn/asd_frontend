@@ -64,7 +64,7 @@ const Register = () => {
                 title: "INFO",
                 text: "Register Berhasil",
                 icon: "success",
-                confirmButtonText: "Ok!s"
+                confirmButtonText: "Ok!"
             });
             return;
 

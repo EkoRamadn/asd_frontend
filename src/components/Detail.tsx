@@ -4,6 +4,7 @@ import "../style/detail.css";
 import "../style/font.css";
 import { useData } from "../context/DataContext";
 import { Dataquery } from "../lib/Dataquery";
+import Loading from "./Loading";
 
 const formatRupiah = (angka: number) =>
     angka.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
@@ -64,7 +65,7 @@ const Detail = () => {
                 </div>
 
                 {loading ? (
-                    <p className="inria-sans-regular loading">Memuat data... 🌀</p>
+                    <div className="inria-sans-regular containerin"><Loading /></div>
                 ) : (
                     <>
                         {!hasData && (

@@ -1,7 +1,31 @@
-import { type DataType, type RawDataType, type DetailDataType, type DombaItem, type PakanItem } from "../interface/interface.";
+// Dataquery.ts
+import Swal from "sweetalert2";
+import {
+    type DataType,
+    type RawDataType,
+    type DetailDataType,
+    type DombaItem,
+    type PakanItem,
+} from "../interface/interface.";
+
 const baseURL = import.meta.env.VITE_API_URL;
 
 export class Dataquery {
+    private static handleForbidden() {
+        // alert("Token kamu udah kadaluarsa");
+        Swal.fire({
+            title: "INFO",
+            text: `Sesi kadaluarsa!`,
+            icon: "error",
+            confirmButtonText: "Ok!"
+        });
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+
+        window.location.href = "/login";
+    }
+
     static async getData(month: number, year: number, token: string): Promise<DataType[]> {
         try {
             const res = await fetch(`${baseURL}/data/bulanan?bulan=${month + 1}&tahun=${year}`, {
@@ -11,10 +35,7 @@ export class Dataquery {
             });
 
             if (res.status === 403) {
-
-                localStorage.removeItem('token');
-                localStorage.removeItem('username');
-
+                this.handleForbidden();
                 throw new Error("Akses ditolak! Token tidak valid atau kamu tidak punya izin.");
             }
 
@@ -22,10 +43,9 @@ export class Dataquery {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
 
-
             const rawData: RawDataType[] = await res.json();
 
-            const formattedData: DataType[] = await rawData.map((item, index) => {
+            return rawData.map((item, index) => {
                 const dateObj = new Date(item.tanggal);
                 const hari = dateObj.toLocaleDateString("id-ID", { weekday: "long" });
                 const tanggalFormatted = `${hari} ${dateObj.toLocaleDateString("id-ID").replace(/\//g, "-")}`;
@@ -38,11 +58,8 @@ export class Dataquery {
                     status: "pass",
                 };
             });
-
-            return await formattedData;
         } catch (error: unknown) {
             const errMsg = error instanceof Error ? error.message : String(error);
-
             return [
                 {
                     id: 0,
@@ -54,6 +71,7 @@ export class Dataquery {
             ];
         }
     }
+
     static async getDataDetail(date: string, token: string): Promise<DetailDataType | Error> {
         try {
             const res = await fetch(`${baseURL}/data/harian?tanggal=${encodeURIComponent(date)}`, {
@@ -63,10 +81,7 @@ export class Dataquery {
             });
 
             if (res.status === 403) {
-                // Hapus token dari localStorage kalau akses ditolak
-                localStorage.removeItem('token');
-                localStorage.removeItem('username');
-
+                this.handleForbidden();
                 throw new Error("Akses ditolak! Token tidak valid atau kamu tidak punya izin.");
             }
 
@@ -74,9 +89,7 @@ export class Dataquery {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
 
-            const data: DetailDataType = await res.json();
-            return data;
-
+            return await res.json();
         } catch (error: unknown) {
             const errMsg = error instanceof Error ? error.message : String(error);
             return new Error(errMsg);
@@ -91,14 +104,11 @@ export class Dataquery {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
             });
 
             if (res.status === 403) {
-
-                localStorage.removeItem('token');
-                localStorage.removeItem('username');
-
+                this.handleForbidden();
                 throw new Error("Akses ditolak! Token tidak valid atau kamu tidak punya izin.");
             }
 
@@ -106,18 +116,14 @@ export class Dataquery {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
 
-
             const rawData = await res.json();
-
             return { status: rawData.message, info: "Pass" };
-
-            return await { Status: rawData };
         } catch (error: unknown) {
             const errMsg = error instanceof Error ? error.message : String(error);
-
-            return { status: errMsg, info: "Fail" }
+            return { status: errMsg, info: "Fail" };
         }
     }
+
     static async addTransactionPakan(data: PakanItem, token: string) {
         try {
             const res = await fetch(`${baseURL}/tambah/InsertPenjualanPakan`, {
@@ -126,14 +132,11 @@ export class Dataquery {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
             });
 
             if (res.status === 403) {
-
-                localStorage.removeItem('token');
-                localStorage.removeItem('username');
-
+                this.handleForbidden();
                 throw new Error("Akses ditolak! Token tidak valid atau kamu tidak punya izin.");
             }
 
@@ -141,18 +144,14 @@ export class Dataquery {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
 
-
             const rawData = await res.json();
-
             return { status: rawData.message, info: "Pass" };
-
-            return await { Status: rawData };
         } catch (error: unknown) {
             const errMsg = error instanceof Error ? error.message : String(error);
-
-            return { status: errMsg, info: "Fail" }
+            return { status: errMsg, info: "Fail" };
         }
     }
+
     static async addTransactionBahanBaku(data: PakanItem, token: string) {
         try {
             const res = await fetch(`${baseURL}/tambah/insertPembelianBahan`, {
@@ -161,14 +160,11 @@ export class Dataquery {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
             });
 
             if (res.status === 403) {
-
-                localStorage.removeItem('token');
-                localStorage.removeItem('username');
-
+                this.handleForbidden();
                 throw new Error("Akses ditolak! Token tidak valid atau kamu tidak punya izin.");
             }
 
@@ -176,16 +172,11 @@ export class Dataquery {
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
 
-
             const rawData = await res.json();
-
             return { status: rawData.message, info: "Pass" };
-
-            return await { Status: rawData };
         } catch (error: unknown) {
             const errMsg = error instanceof Error ? error.message : String(error);
-
-            return { status: errMsg, info: "Fail" }
+            return { status: errMsg, info: "Fail" };
         }
     }
 }

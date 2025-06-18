@@ -5,6 +5,7 @@
     padding-bottom: 50px;
     padding-inline: 8%;
     position: fixed;
+    overflow-y: auto;
     font-size: 15px;
     top: 600%;
     left: 50%;
@@ -12,7 +13,6 @@
     background: white;
     color: black;
     z-index: 9999;
-
     transition:1s linear all;
 }
 

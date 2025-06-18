@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { HistoryList } from "../components/HistotyList"
 import { useData } from "../context/DataContext"
 import { Dataquery } from "../lib/Dataquery"
+import Loading from "../components/Loading"
 
 const namaBulan: string[] = [
     "Januari", "Februari", "Maret", "April", "Mei", "Juni",
@@ -105,7 +106,7 @@ const History = () => {
                 </div>
 
                 {loading ? (
-                    <div className="loading-text">Memuat data... 🌀</div>
+                    <div className="loadinghistory "><Loading /></div>
                 ) : (
                     <HistoryList data={filteredData} isWeek={false} />
                 )}
