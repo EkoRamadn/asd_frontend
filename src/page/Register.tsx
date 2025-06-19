@@ -80,7 +80,7 @@ const Register = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container register">
             <div className="login-container">
                 <div className="back-login">
                     <Link to="/"><img src={back} alt="Kembali" /></Link>

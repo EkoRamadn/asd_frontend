@@ -60,7 +60,7 @@ const Login = () => {
     const toggleShowPassword = () => setShowPassword(!showPassword);
 
     return (
-        <div className="container">
+        <div className="container login">
             <div className="login-container">
                 <div className="login-header">
                     <div className="login-img"><img src="" alt="" /></div>

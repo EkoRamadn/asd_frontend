@@ -2,9 +2,12 @@
   width: 250px;
   height: 100vh;
   padding: 2rem 1rem;
-  color: white;
+  color: #000;
   background: linear-gradient(to bottom right, #1a1aff 20%, #9d00ff, #ff00cc, #b2f0ff);
   display: flex;
+  background-image: url("../assets/image/sidemenu.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   flex-direction: column;
 }
 
@@ -22,7 +25,7 @@
 }
 
 .side-menu .profile-menu a{
-  color: white;
+  color: 0000;
 }
 
 .menu-links {
@@ -37,7 +40,7 @@
 
 .menu-links li a {
   text-decoration: none;
-  color: white;
+  color: #000;
   font-weight: bold;
   transition: color 0.3s ease;
 }

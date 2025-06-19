@@ -44,6 +44,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom right, #010151 25%, #5e00c9, #ff00d4 );
+  /* background: linear-gradient(to bottom right, #010151 25%, #5e00c9, #ff00d4 ); */
+  background-image: url("../assets/image/Beranda-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   z-index: -1;
 }

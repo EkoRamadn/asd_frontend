@@ -1,12 +1,15 @@
-.container {
+.container.beranda {
     position: relative;
     padding-top: 45px;
     padding-bottom: 50px;
     padding-inline: 8%;
     width: 100vw;
-    color: white;
+    color: black;
     scrollbar-width: none;
     z-index: 99;
+     /* b ackground-image: url("../assets/image/Beranda-bg.png"); */
+    
+   
 }
 
 .header {
@@ -119,18 +122,18 @@
     padding-top: 45px;
     padding-bottom: 50px;
     padding-inline: 8%;
-    max-width: 100%; /* ✅ hindari horizontal scroll */
+    max-width: 100%; 
     color: white;
     overflow-x: hidden;
     z-index: 99;
 }
 
-/* Tambahkan jarak antara menu deskripsi dan notif */
+
 .menu-header {
     align-items: center;
 }
 
-/* Tambahkan jarak antar header */
+
 .menu-describ h1 {
     margin: 0;
     font-size: 1.2rem;
@@ -141,12 +144,12 @@
     opacity: 0.8;
 }
 
-/* Biar chart nggak dempet ke atas */
+
 .container > section > div:first-child {
     margin-bottom: 1rem;
 }
 
-/* Responsive icon di menu */
+
 .menu-icon {
     width: 48px;
     height: 48px;
@@ -154,15 +157,15 @@
     box-shadow: 0 0 6px rgba(255,255,255,0.2);
 }
 
-/* History item jarak antar baris biar lebih lega */
+
 .history-item {
     padding: 10px 16px;
     border-radius: 8px;
 }
 
-/* Text Selengkapnya biar enak diklik dan elegan */
+
 .history > a {
-    color: #fff;
+    color: #000;
     display: inline-block;
     margin-top: 8px;
     font-weight: bold;

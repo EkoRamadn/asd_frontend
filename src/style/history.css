@@ -1,4 +1,12 @@
-
+.container.history{
+    background-image: url("../assets/image/backgroundlogin.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Ini kuncinya sayang 💘 */
+    min-height: 100vh;
+    width: 100vw;
+}
 
 .history-header > .info{
     display: flex;

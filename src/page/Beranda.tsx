@@ -46,7 +46,7 @@ const Beranda = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container beranda">
             {menuActive && <div className="backdrop" onClick={closeMenu} />}
             <div className="side" ref={sideMenuRef}>
                 <SideMenu />

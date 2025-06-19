@@ -103,12 +103,16 @@ const Profile = () => {
     return (
         <div className="profile">
             <div className="profile-container">
-                <Link className="back" to="/">
-                    <img src={back} alt="Back" />
-                </Link>
+
 
                 <div className="profile-head">
-                    <h2 className="inria-sans-regular">Profile</h2>
+                    <div className="head-nav">
+                        <Link className="back" to="/">
+                            <img src={back} alt="Back" />
+                        </Link>
+                        <h2 className="inria-sans-regular">Profile</h2>
+                    </div>
+
                     <div className="info">
                         <div className="content">
                             <div className="img" onClick={openFilePicker}>

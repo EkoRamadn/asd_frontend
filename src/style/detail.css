@@ -18,8 +18,11 @@
 
 .detail.show {
     top: 50%;
-    color: white;
-    background: linear-gradient(to bottom right, #010151 25%, #5e00c9, #ff00d4);
+    color: black;
+    background-image: url("../assets/image/backgroundlogin.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background: linear-gradient(to bottom right, #010151 25%, #5e00c9, #ff00d4); */
 }
 
 .detail .tabel-container {
@@ -122,7 +125,7 @@ td {
 
 #close{
     background:  none;
-    color: white;
+    color: black;
     border: none;
     outline: none;
     padding: none;

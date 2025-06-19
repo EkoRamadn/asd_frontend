@@ -7,6 +7,14 @@
     margin-bottom: 50px;
 }
 
+.container.login,.container.register{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../assets//image/backgroundlogin.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .login-header {
     margin-bottom: 1rem;
 }

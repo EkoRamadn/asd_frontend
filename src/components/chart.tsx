@@ -36,7 +36,7 @@ const chartOptions: ChartOptions<'line'> = {
     scales: {
         x: {
             ticks: {
-                color: '#ffffff',
+                color: '#000',
             },
             grid: {
                 color: 'rgba(255, 255, 255, 0.1)',
@@ -44,7 +44,7 @@ const chartOptions: ChartOptions<'line'> = {
         },
         y: {
             ticks: {
-                color: '#ffffff',
+                color: '#000',
                 callback(value: number | string) {
                     return new Intl.NumberFormat('id-ID', {
                         maximumFractionDigits: 1,

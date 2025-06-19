@@ -1,15 +1,22 @@
 .profile {
+  width: 100vw;
+  height: 100vh;
   padding-top: 45px;
   padding-bottom: 50px;
   padding-inline: 8%;
   font-family: sans-serif;
-  color: #fff;
+  color: #000;
+  background-image: url("../assets/image/profile-mobile.png");
+  background-position: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .profile-container {
   max-width: 500px;
   margin: 0 auto;
-  background: linear-gradient(to right, #1e1e80, #6e1ecf);
+  /* background-color: rgb(156, 225, 244); */
+  /* background: linear-gradient(to right, #1e1e80, #6e1ecf); */
   padding: 20px;
   border-radius: 10px;
   position: relative;
@@ -53,7 +60,7 @@
   height: 65px;
   border-radius: 50%;
   overflow: hidden;
-  background-color: black;
+  background-color: white;
   cursor: pointer;
 }
 
@@ -86,7 +93,7 @@
 }
 
 .profile-body a {
-  color: white;
+  color: black;
   text-decoration: underline;
 }
 
@@ -147,6 +154,11 @@
 }
 
 .modal-crop button:last-child {
-  background: #ec4899;
+  background: rgb(156, 225, 244);
   color: white;
+}
+.head-nav{
+  display: flex;
+  gap: .5rem;
+  align-items: center;
 }

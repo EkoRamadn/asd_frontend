@@ -3,7 +3,7 @@
     padding-bottom: 50px;
     padding-inline: 8%;
     width: 100vw;
-    color: white;
+    color: black;
 }
 
 .tambahdata-head h2 {
@@ -42,7 +42,7 @@
 .tambahdata button:not(.back) {
   margin-top: 1rem;
   padding: 10px 20px;
-  background-color: #5e60ce;
+  background-color: rgb(61, 213, 255);
   color: white;
   border: none;
   border-radius: 8px;
@@ -52,7 +52,7 @@
 }
 
 .tambahdata button:hover:not(.back) {
-  background-color: #6930c3;
+  background-color: rgb(156, 225, 244);
 }
 
 .tambahdata .back {
