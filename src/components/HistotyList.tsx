@@ -71,7 +71,7 @@ export const HistoryList = ({ data, isWeek }: HistoryListProps) => {
     return (
         <ul className="history-data-container">
             {displayData.map(({ id, date, income, expanse }) => (
-                <li key={id} className="fade-in" onClick={() => hadleClick(date)}>
+                <li key={id} className=" history1" onClick={() => hadleClick(date)}>
                     <div className="history-item" >
                         <div className="inria-sans-regular xl history-rigth">
                             <span>{date}</span>

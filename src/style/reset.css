@@ -23,6 +23,9 @@
 *:focus {
   outline: none;
 }
+a{
+  text-decoration: none;
+}
 
 .load {
   position: fixed;

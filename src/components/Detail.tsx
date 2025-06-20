@@ -5,6 +5,7 @@ import "../style/font.css";
 import { useData } from "../context/DataContext";
 import { Dataquery } from "../lib/Dataquery";
 import Loading from "./Loading";
+import back from "../../public/assets/icons/back.png"
 
 const formatRupiah = (angka: number) =>
     angka.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
@@ -58,9 +59,14 @@ const Detail = () => {
     return (
         <div className="detail" id="detail">
             <div className="detail-container">
-                <button id="close" onClick={handleClick}>Close</button>
-                <div className="detail-head">
+                <div className="title">
+                    <button id="close" onClick={handleClick}>
+                        <img src={back} alt="" />
+                    </button>
                     <h2 className="inria-sans-regular">Detail</h2>
+                </div>
+
+                <div className="detail-head">
                     <span className="inria-sans-regular">{dateclick}</span>
                 </div>
 

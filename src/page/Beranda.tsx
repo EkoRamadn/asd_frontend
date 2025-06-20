@@ -1,8 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import menu from "../../public/assets/icons/menu-bar.png";
 import nontif from "../../public/assets/icons/nontif.png";
-import income from "../../public/assets/icons/income.png";
-import expanse from "../../public/assets/icons/expanse.png";
 import "../style/beranda.css";
 import SideMenu from "../components/SideMenu";
 import { useData } from "../context/DataContext";
@@ -10,6 +8,8 @@ import { HistoryList } from "../components/HistotyList";
 import MyBarChart from "../components/chart";
 import { Link } from "react-router-dom";
 import Loading from "../components/Loading";
+import incomebtn from "../../public/assets/icons/income1.png"
+import expanseBtn from "../../public/assets/icons/expanse1.png"
 
 const Beranda = () => {
     const { data, loading } = useData();
@@ -86,12 +86,12 @@ const Beranda = () => {
                     <div className="menu-container">
                         <Link to="/tambahpemasukan">
                             <div className="income-icon menu-icon">
-                                <img src={income} alt="income-icon" />
+                                <img src={incomebtn} alt="income-icon" />
                             </div>
                         </Link>
                         <Link to="/pembelianbahan">
                             <div className="expanse-icon menu-icon">
-                                <img src={expanse} alt="expanse-icon" />
+                                <img src={expanseBtn} alt="expanse-icon" />
                             </div>
                         </Link>
                     </div>

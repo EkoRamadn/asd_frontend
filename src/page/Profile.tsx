@@ -4,15 +4,13 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Cropper, { type Area } from "react-easy-crop";
 import getCroppedImg from "../utils/cropImage";
 import { Link } from "react-router-dom";
+import profile from "../../public/assets/icons/avatar.png";
+import { type ProfileData } from "../interface/interface.";
+import Swal from "sweetalert2";
 
 const baseURL = import.meta.env.VITE_API_URL;
 
-interface ProfileData {
-    username: string;
-    email: string;
-    file?: string;
-    avatar?: string; // tambahkan jika kamu pakai 'avatar' juga
-}
+
 
 const Profile = () => {
     const [dat, setDat] = useState<ProfileData | null>(null);
@@ -37,6 +35,10 @@ const Profile = () => {
 
                 const data = await res.json();
                 setDat(data[0]);
+                if (data[0].avatar) {
+                    localStorage.setItem('avatar', data[0].avatar)
+                }
+
 
                 if (data[0].avatar) {
                     setAvatar(`/assets/${data[0].avatar}`);
@@ -89,10 +91,24 @@ const Profile = () => {
 
             const result = await res.json();
             setAvatar(`/assets/${result.filename}`);
-            alert("Avatar berhasil disimpan! 🎉");
+            Swal.fire({
+                title: "INFO",
+                text: `Avatar Berhasil diubah.`,
+                icon: "success",
+                confirmButtonText: "Ok!",
+                confirmButtonColor: "#299CD3"
+            }).then(() => {
+                location.reload();
+            });
         } catch (err) {
             console.error("Upload avatar error:", err);
-            alert("Gagal menyimpan avatar 😢");
+            Swal.fire({
+                title: "INFO",
+                text: `Avatar gagal diubah.`,
+                icon: "error",
+                confirmButtonText: "Ok!",
+                confirmButtonColor: "#299CD3"
+            });
         } finally {
             setUploading(false);
         }
@@ -121,7 +137,7 @@ const Profile = () => {
                                         avatar ??
                                         (dat?.file
                                             ? `https://asd-backend.vercel.app/api/avatar/image?file=${encodeURIComponent(dat.file)}`
-                                            : "/default-avatar.png")
+                                            : profile)
                                     }
                                     alt="Avatar"
                                 />

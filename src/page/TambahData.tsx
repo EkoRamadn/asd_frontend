@@ -77,7 +77,15 @@ const TambahData = () => {
         e.preventDefault();
 
         if (!token) {
-            alert("Token tidak ditemukan, silakan login ulang.");
+            Swal.fire({
+                title: "INFO",
+                text: `Sesi Login Tertutup`,
+                icon: "error",
+                confirmButtonText: "Ok!",
+                confirmButtonColor: "#299CD3",
+            }).then(() => {
+                location.reload(); // Reload halaman setelah user klik OK
+            });
             return;
         }
 
@@ -89,7 +97,13 @@ const TambahData = () => {
         );
 
         if (dombaValid.length === 0 && pakanValid.length === 0) {
-            alert("Mohon isi setidaknya satu data domba atau pakan");
+            Swal.fire({
+                title: "INFO",
+                text: `Isi data Field Kosong`,
+                icon: "error",
+                confirmButtonText: "Ok!",
+                confirmButtonColor: "#299CD3"
+            });
             return;
         }
 
@@ -127,12 +141,13 @@ const TambahData = () => {
 
     return (
         <div className="tambahdata">
-            <button className="back" onClick={handleBack}>
-                <img width="100%" src={back} alt="Kembali" />
-            </button>
+
 
             <div className="tambahdata-container">
                 <div className="tambahdata-head">
+                    <button className="back" onClick={handleBack}>
+                        <img width="100%" src={back} alt="Kembali" />
+                    </button>
                     <h2>Input Pemasukan</h2>
                 </div>
 

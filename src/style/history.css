@@ -6,7 +6,9 @@
     background-attachment: fixed; /* Ini kuncinya sayang 💘 */
     min-height: 100vh;
     width: 100vw;
+    color: black;
 }
+
 
 .history-header > .info{
     display: flex;
@@ -16,7 +18,7 @@
     margin-bottom: 1rem;
 }
 
-.history-header h1 {
+.container.history .history-header h1 {
     font-size: 20px;
     
 }
@@ -50,14 +52,13 @@
 .history-header .title{
     display: flex;
     align-items: center;
-    gap: .3rem;
+    gap: 1rem;
     margin-bottom: 1rem;
 }
 
 .history-header .title img{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 50px;
+    height: 50px;
 }
 
 .history-filter form {
@@ -102,4 +103,31 @@
   border: 1px solid #ccc;
   font-size: 1rem;
 }
+
+.floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+
+.floating-buttons button {
+  padding: 10px 16px;
+  border: none;
+  background-color: #299CD3;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.floating-buttons button:hover {
+  background-color: #1e7eb1;
+}
+
 

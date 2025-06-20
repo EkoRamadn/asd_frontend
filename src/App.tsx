@@ -11,6 +11,7 @@ import Profile from './page/Profile';
 import TambahData from './page/TambahData';
 import Pembelianbahan from './page/Pembelianbahan';
 import NotFound from './page/NotFound';
+import Contact from './page/Contact';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         {/* public */}
         <Route path='/login' element={<Login />} />
         <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='/register' element={<Register />} />
 
 

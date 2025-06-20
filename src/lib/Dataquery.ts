@@ -12,18 +12,18 @@ const baseURL = import.meta.env.VITE_API_URL;
 
 export class Dataquery {
     private static handleForbidden() {
-        // alert("Token kamu udah kadaluarsa");
         Swal.fire({
             title: "INFO",
             text: `Sesi kadaluarsa!`,
             icon: "error",
-            confirmButtonText: "Ok!"
+            confirmButtonText: "Ok!",
+            confirmButtonColor: "#299CD3"
+        }).then(() => {
+            // Setelah tombol OK diklik
+            localStorage.removeItem("token");
+            localStorage.removeItem("username");
+            window.location.href = "/login";
         });
-
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-
-        window.location.href = "/login";
     }
 
     static async getData(month: number, year: number, token: string): Promise<DataType[]> {

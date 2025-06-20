@@ -4,6 +4,7 @@ import "../style/login.css";
 import back from "../../public/assets/icons/back.png";
 import Swal from "sweetalert2";
 const baseURL = import.meta.env.VITE_API_URL;
+import logo from "../../public/assets/icons/logo.png"
 
 const Register = () => {
     const [username, setUsername] = useState("");
@@ -87,7 +88,7 @@ const Register = () => {
                 </div>
 
                 <div className="login-header">
-                    <div className="login-img"><img src="" alt="" /></div>
+                    <div className="login-img"><img width="100%" src={logo} alt="logo" /></div>
                     <h1 className="login-describ">Buat akun anda.</h1>
                 </div>
 
@@ -132,7 +133,7 @@ const Register = () => {
                         </button>
                     </div>
 
-                    <button type="submit">Daftar</button>
+                    <button id="register" type="submit">Daftar</button>
                 </form>
             </div>
         </div>

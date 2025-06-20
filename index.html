@@ -5,15 +5,18 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + React + TS</title>
+  <title>MyIncome</title>
 
   <style>
+    input{
+      border: none;
+    }
     #loader {
       position: fixed;
       inset: 0;
       display: flex;
       justify-content: center;
-      align-items: center;
+      margin-top: 30%;
       background: white;
       background-image: url("./src/assets/image/background1.png");
       background-repeat: no-repeat;
@@ -21,17 +24,53 @@
       z-index: 9999;
       transition: opacity 0.5s ease, visibility 0.5s;
     }
+    #loader > .logocontainer{
+      width: max-content;
+      text-align: center;
+    }
+
+    .logocontainer > img{
+      width: 228px;
+      height: 228px;
+    }
 
     #loader.fade-out {
       opacity: 0;
       visibility: hidden;
     }
+    #pane{
+      display: none;
+      position: fixed;
+      background-color: black;
+      color: white;
+      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 999999;
+      align-items: center;
+      justify-content: center;
+    }
+   @media screen and (min-width: 500px) {
+  /* Gaya ini cuma aktif kalau layar >= 600px */
+  #pane{
+    display: flex;
+  }
+}
   </style>
 </head>
 
 <body>
+  <div id="pane">
+    <h1>Web Ini Tidak Support Tampil dekstop</h1>
+  </div>
   <div id="loader">
-    <h2>Memuat aplikasi...</h2>
+    <div class="logocontainer">
+      <img src="./public/assets/icons/logopng.png" alt="logo">
+      <!-- <h2>Memuat aplikasi...</h2> -->
+    </div>
+    
   </div>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>

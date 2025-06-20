@@ -123,7 +123,7 @@
     padding-bottom: 50px;
     padding-inline: 8%;
     max-width: 100%; 
-    color: white;
+    color: black;
     overflow-x: hidden;
     z-index: 99;
 }
@@ -157,6 +157,16 @@
     box-shadow: 0 0 6px rgba(255,255,255,0.2);
 }
 
+.history1{
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    /* scale: 1; */
+    transition: .3s linear all;
+}
+
+.history1:hover{
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    scale: 1.03;
+}
 
 .history-item {
     padding: 10px 16px;
@@ -189,4 +199,7 @@
     background-color: transparent;
     width: 100px;
     margin-inline: auto;
+}
+.history a{
+    text-decoration: none;
 }

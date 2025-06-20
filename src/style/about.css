@@ -1,0 +1,50 @@
+.about .title,.contact .title{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.title h2{
+    font-size: 20px;
+}
+
+.about p{
+    text-align: justify;     
+    text-indent: 2em;          
+    line-height: 1.6;         
+    margin-bottom: 1em;
+}
+
+.contact ul{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.contact-body li a{
+    display: flex;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background-color: rgb(255, 255, 255);
+    align-items: center;
+    gap: 1.2rem;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: black;
+    text-transform: uppercase;
+    transition: .3s linear all;
+    scale: 1;
+}
+
+.contact-body li a:hover{
+    scale: 1.03;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 15px;
+}
+
+.contact-body li a .avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: red;
+}

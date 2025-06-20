@@ -11,7 +11,7 @@ import {
 import { type DataType } from "../interface/interface.";
 import { Dataquery } from "../lib/Dataquery";
 import { getDataWeek } from "../utils/dataWeek";
-
+const baseURL = import.meta.env.VITE_API_URL;
 type DataContextType = {
     dataweek: DataType[] | [];
     setDataisWeek: (data: DataType[]) => void;
@@ -49,6 +49,19 @@ export const DataProvider = ({ children }: DataProviderProps) => {
                 const year: number = now.getFullYear();
 
                 const formatData: DataType[] = await Dataquery.getData(month, year, token);
+                const res = await fetch(`${baseURL}/getprofile`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                });
+
+                if (!res.ok) throw new Error("Gagal ambil profil");
+
+                const data = await res.json();
+                if (data[0]?.file) {
+                    localStorage.setItem('avatar', data[0]?.file)
+                }
+
                 setData(formatData);
                 setDataWeek(getDataWeek(formatData));
 

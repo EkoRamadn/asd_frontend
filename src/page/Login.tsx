@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "../style/login.css";
 import Swal from "sweetalert2";
 const baseURL = import.meta.env.VITE_API_URL;
+import logo from "../../public/assets/icons/logo.png"
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -63,7 +64,7 @@ const Login = () => {
         <div className="container login">
             <div className="login-container">
                 <div className="login-header">
-                    <div className="login-img"><img src="" alt="" /></div>
+                    <div className="login-img"><img width="100%" src={logo} alt="" /></div>
                     <h1 className="login-describ">Login Ke Akun Anda</h1>
                 </div>
 
@@ -94,7 +95,7 @@ const Login = () => {
                         </button>
                     </div>
 
-                    <button type="submit">Masuk</button>
+                    <button type="submit" id="login">Masuk</button>
                 </form>
 
                 <p className="describ-login">

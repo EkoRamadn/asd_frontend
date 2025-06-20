@@ -53,3 +53,10 @@ export interface DetailDataType {
         price: number,
     }
 }
+
+export interface ProfileData {
+    username: string;
+    email: string;
+    file?: string;
+    avatar?: string; // tambahkan jika kamu pakai 'avatar' juga
+}

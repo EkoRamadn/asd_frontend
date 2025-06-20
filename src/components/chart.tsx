@@ -78,12 +78,12 @@ export default function MoodChart() {
         {
             label: 'Income',
             data: income,
-            borderColor: '#00ffff',
+            borderColor: '#5CA4FF',
         },
         {
             label: 'Expanse',
             data: expanse,
-            borderColor: '#ff7f7f',
+            borderColor: '#c0c0c0',
         },
     ], [income, expanse]);
 

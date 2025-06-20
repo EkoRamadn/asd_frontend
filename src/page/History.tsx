@@ -24,6 +24,30 @@ const History = () => {
     const [filteredData, setFilteredData] = useState(data);
     const [loading, setLoading] = useState(false);
 
+    const sortByIncomeDescending = () => {
+        const sorted = [...filteredData];
+        for (let i = 0; i < sorted.length - 1; i++) {
+            for (let j = 0; j < sorted.length - i - 1; j++) {
+                if ((sorted[j].income || 0) < (sorted[j + 1].income || 0)) {
+                    [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
+                }
+            }
+        }
+        setFilteredData(sorted);
+    };
+
+    const sortByExpenseDescending = () => {
+        const sorted = [...filteredData];
+        for (let i = 0; i < sorted.length - 1; i++) {
+            for (let j = 0; j < sorted.length - i - 1; j++) {
+                if ((sorted[j].expanse || 0) < (sorted[j + 1].expanse || 0)) {
+                    [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
+                }
+            }
+        }
+        setFilteredData(sorted);
+    };
+
     useEffect(() => {
         const totalIncome = filteredData.reduce((sum, dt) => sum + (dt.income || 0), 0)
         const totalExpense = filteredData.reduce((sum, dt) => sum + (dt.expanse || 0), 0)
@@ -110,6 +134,10 @@ const History = () => {
                 ) : (
                     <HistoryList data={filteredData} isWeek={false} />
                 )}
+                <div className="floating-buttons">
+                    <button onClick={sortByIncomeDescending}>Urut Income 🔼</button>
+                    <button onClick={sortByExpenseDescending}>Urut Expense 🔼</button>
+                </div>
             </div>
         </div>
     )

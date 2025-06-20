@@ -54,7 +54,15 @@ const Pembelianbahan = () => {
         e.preventDefault();
 
         if (!token) {
-            alert("Token tidak ditemukan, silakan login ulang.");
+            Swal.fire({
+                title: "INFO",
+                text: `Isi data Field Kosong`,
+                icon: "error",
+                confirmButtonText: "Ok!",
+                confirmButtonColor: "#299CD3"
+            }).then(() => {
+                location.reload(); // Reload halaman setelah user klik OK
+            });
             return;
         }
 
@@ -63,7 +71,13 @@ const Pembelianbahan = () => {
         );
 
         if (pakanValid.length === 0) {
-            alert("Mohon isi setidaknya satu data bahan baku");
+            Swal.fire({
+                title: "INFO",
+                text: `Isi data Field Kosong`,
+                icon: "error",
+                confirmButtonText: "Ok!",
+                confirmButtonColor: "#299CD3"
+            });
             return;
         }
 
@@ -100,12 +114,13 @@ const Pembelianbahan = () => {
 
     return (
         <div className="tambahdata">
-            <button className="back" onClick={handleBackClick}>
-                <img width="100%" src={back} alt="Kembali" />
-            </button>
+
 
             <div className="tambahdata-container">
                 <div className="tambahdata-head">
+                    <button className="back" onClick={handleBackClick}>
+                        <img width="100%" src={back} alt="Kembali" />
+                    </button>
                     <h2>Input Pengeluaran</h2>
                 </div>
 
