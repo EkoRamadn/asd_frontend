@@ -164,10 +164,10 @@ const Profile = () => {
                         {dat ? dat.email : "Email belum dimuat"}
                     </p>
                     <p className="inria-sans-regular">
-                        <Link to="">Pusat Bantuan</Link>
+                        <Link to="/contact">Pusat Bantuan</Link>
                     </p>
                     <p className="inria-sans-regular">
-                        <Link to="">Tentang</Link>
+                        <Link to="/about">Tentang</Link>
                     </p>
                 </div>
             </div>
